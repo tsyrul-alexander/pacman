@@ -9,17 +9,17 @@ namespace GameFramework.Collider.QuadTree
 		public QuadTreeMonitor(Rectangle bound) {
 			_rootTreeNode = new QuadTreeNode(bound, 0);
 		}
-		public void Add(IRectangleCollider collider) {
+		public void Add(ICollider collider) {
 			_rootTreeNode.Add(collider);
 		}
 		public void Clear() {
 			_rootTreeNode.Clear();
 		}
-		public IList<IRectangleCollider> Search(Rectangle rectangle) {
+		public IList<ICollider> Search(Rectangle rectangle) {
 			return _rootTreeNode.Search(rectangle);
 		}
-		public IList<IRectangleCollider> Search(IRectangleCollider collider) {
-			return Search(collider.Bound).Where(coll => coll != collider).ToList();
+		public IList<ICollider> Search(ICollider collider) {
+			return Search(collider.ColliderItem.Bound).Where(coll => coll != collider).ToList();
 		}
 	}
 }

@@ -11,15 +11,15 @@ namespace GameFramework.Collider.QuadTree
 
 		private Rectangle _bound;
 		private readonly int _level;
-		private readonly IList<IRectangleCollider> _colliders;
+		private readonly IList<ICollider> _colliders;
 
 		internal QuadTreeNode[] Nodes;
 		public QuadTreeNode(Rectangle bound, int level) {
 			_bound = bound;
 			_level = level;
-			_colliders = new List<IRectangleCollider>();
+			_colliders = new List<ICollider>();
 		}
-		public void Add(IRectangleCollider collider) {
+		public void Add(ICollider collider) {
 			var rectangle = collider.Bound;
 			if (Nodes != null) {
 				var index = GetIndex(rectangle);
@@ -56,12 +56,12 @@ namespace GameFramework.Collider.QuadTree
 			}
 			Nodes = null;
 		}
-		public IList<IRectangleCollider> Search(Rectangle rectangle) {
-			var list = new List<IRectangleCollider>();
+		public IList<ICollider> Search(Rectangle rectangle) {
+			var list = new List<ICollider>();
 			Search(rectangle, list);
 			return list;
 		}
-		protected virtual void Search(Rectangle rectangle, List<IRectangleCollider> list) {
+		protected virtual void Search(Rectangle rectangle, List<ICollider> list) {
 			var index = GetIndex(rectangle);
 			var intersectColliders = _colliders.Where(collider => collider.Bound.Intersects(rectangle));
 			if (intersectColliders.Count() > 1) {

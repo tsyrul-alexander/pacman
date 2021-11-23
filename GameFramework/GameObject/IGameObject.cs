@@ -3,7 +3,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace GameFramework.GameObject
 {
-	public interface IGameObject: IUpdateable, IDrawable, IRectangleCollider {
+	public interface IGameObject: IUpdateable, IDrawable, ICollider {
 		void Configure(SpriteBatch spriteBatch);
 	}
 }

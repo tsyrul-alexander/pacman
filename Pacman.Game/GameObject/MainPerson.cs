@@ -36,7 +36,7 @@ namespace Pacman.Game.GameObject
 				OnCollide(colliders);
 			}
 		}
-		protected virtual void OnCollide(IList<IRectangleCollider> colliders) {
+		protected virtual void OnCollide(IList<ICollider> colliders) {
 			foreach (var collider in colliders) {
 				if (collider is Wall wall) {
 					wall.Visible = false;

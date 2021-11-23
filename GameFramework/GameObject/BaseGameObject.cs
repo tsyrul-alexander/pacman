@@ -1,4 +1,5 @@
 ﻿using System;
+using GameFramework.Collider;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -33,38 +34,35 @@ namespace GameFramework.GameObject
 				OnVisibleChanged();
 			}
 		}
-		public Vector2 Position {
+		public virtual Vector2 Position {
 			get => _position;
 			set {
 				if (_position == value) {
 					return;
 				}
 				_position = value;
-				ReCalculateBound();
 				OnPositionChanged();
 			}
 		}
-		public Vector2 Size {
+		public virtual Vector2 Size {
 			get => _size;
 			set {
 				if (_size == value) {
 					return;
 				}
 				_size = value;
-				ReCalculateBound();
 				OnSizeChanged();
 			}
 		}
-		public Rectangle Bound { get; private set; }
 		protected SpriteBatch SpriteBatch { get; set; }
-		public virtual void Update(GameTime gameTime) { }
+        public IColliderItem ColliderItem { get; set; }
+
+        public virtual void Update(GameTime gameTime) { }
 		public virtual void Draw(GameTime gameTime) { }
 		public virtual void Configure(SpriteBatch spriteBatch) {
 			SpriteBatch = spriteBatch;
 		}
-		protected virtual void ReCalculateBound() {
-			Bound = new Rectangle(Position.ToPoint(), Size.ToPoint());
-		}
+	
 		protected virtual void OnEnabledChanged() {
 			EnabledChanged?.Invoke(this, EventArgs.Empty);
 		}
